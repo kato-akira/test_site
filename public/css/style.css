@@ -1,0 +1,28 @@
+body { 
+    font-family: sans-serif; 
+    padding: 20px; 
+    max-width: 600px; 
+    margin: 0 auto;
+    font-family: sans-serif;
+    text-align: center;
+    padding-top: 50px;
+    background-color: #f8fafc;
+}
+
+.completed { 
+    text-decoration: line-through; 
+    color: #888; 
+}
+
+.task-item { 
+    display: flex; 
+    align-items: center; gap: 10px; 
+    margin-bottom: 8px; 
+}
+
+form { 
+    display: inline; 
+}
+
+        h1 { color: #2d3748; }
+        p { color: #718096; }
