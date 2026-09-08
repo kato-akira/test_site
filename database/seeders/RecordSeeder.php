@@ -25,7 +25,6 @@ class RecordSeeder extends Seeder
         }
 
         // ★ モデルを使わず、テーブル名を直接指定してインサートする
-        // ここを修正
         DB::table('records')->insert($records);
     }
 }
