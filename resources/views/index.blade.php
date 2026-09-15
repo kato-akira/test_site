@@ -3,48 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>マイショップ | トップページ</title>
-
-    <!-- 検索エンジン・表示設定 -->
-    <meta name="description" content="Laravelで作成したシンプルなWebアプリケーションです。">
-    
-    <!-- CSRFトークン (フォーム通信用) -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <!-- CSSの読み込み (public/css/style.css) -->
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <title>ユーザー一覧</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ time() }}">
 </head>
 <body>
+    <main style="max-width: 800px; margin: 2rem auto; padding: 0 1rem;">
+        <h2>登録ユーザー一覧</h2>
 
-    <!-- ヘッダーエリア -->
-    <header>
-        <div class="header-container">
-            <h1 class="logo">My Store</h1>
-            <nav class="nav-menu">
-                <a href="#">ホーム</a>
-                <a href="#">商品一覧</a>
-                <a href="#">ログイン</a>
-            </nav>
-        </div>
-    </header>
-
-    <!-- メインコンテンツ -->
-    <main>
-        <section class="hero">
-            <h2>ようこそ My Store へ</h2>
-            <p>シンプルな設計で使いやすいWebサービスを提供します。</p>
-        </section>
-
-        <section class="content">
-            <h3>お知らせ</h3>
-            <p>只今サイトの公開準備中です。</p>
-        </section>
+        <ul>
+            @forelse ($users as $user)
+                <li>
+                    ID: {{ $user->id }} | 
+                    <strong>{{ $user->name }}</strong> ({{ $user->email }}) 
+                    <small style="color: #666;">- 登録日: {{ $user->created_at->format('Y/m/d H:i') }}</small>
+                </li>
+            @empty
+                <li>登録されているユーザーはいません。</li>
+            @endforelse
+        </ul>
     </main>
-
-    <!-- フッターエリア -->
-    <footer>
-        <p>&copy; {{ date('Y') }} My Store. All rights reserved.</p>
-    </footer>
-
 </body>
 </html>
