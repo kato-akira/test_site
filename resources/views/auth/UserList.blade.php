@@ -22,20 +22,32 @@
 </head>
 <body>
     <h1>アカウント一覧</h1>
+    <div style="margin-bottom: 20px;">
+        <a href="{{ route('create') }}" class="btn btn-primary" style="padding: 6px 12px; background: #007bff; color: #fff; text-decoration: none; border-radius: 4px;">新規登録</a>
+    </div>
     <table>
         <thead>
             <tr>
-                <th>ID</th>
+                <th>番号</th>
                 <th>名前</th>
                 <th>メールアドレス</th>
+                <th>操作</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($users as $user)
                 <tr>
-                    <td>{{ $user->id }}</td>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
+                    <td>
+                        {{-- actionにルートとユーザーのidを指定 --}}
+                        <form action="{{ route('UserDestroy', $user->id) }}" method="POST" onsubmit="return confirm('削除します。よろしいですか？');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">削除</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
