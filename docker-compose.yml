@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     container_name: laravel_app
     volumes:
-      - ./src:/var/www/html
+      - .:/var/www/html
       - storage-volumes:/var/www/html/storage/framework
       - vendor-volumes:/var/www/html/vendor
     networks:
@@ -22,7 +22,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./src:/var/www/html
+      - .:/var/www/html
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
     networks:
       - laravel_network
