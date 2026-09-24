@@ -1,17 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserRegisterController;
 use App\Http\Controllers\UserListController;
+use App\Http\Controllers\UserController;
 
+// トップページ
 Route::get('/', function () {
     return view('index');
 })->name('top');
 
+// アカウント一覧表示
 Route::get('/UserList', [UserListController::class, 'index']) ->name("UserList");
 
-// 画面表示（GET）
-Route::get('/UserRegistration', [UserRegisterController::class, 'create']) ->name("UserRegistration");
-
-// // 登録処理（POST）
-Route::post('/UserRegistration', [UserRegisterController::class, 'store']);
+// アカウント追加・削除
+Route::prefix('UserList')
+    ->controller(UserController::class)
+    ->group(function(){
+        Route::delete('/{id}','destroy')->name('UserDestroy');
+        Route::get('/create','create')->name('create');
+        Route::post('/','store')->name('store');
+});
