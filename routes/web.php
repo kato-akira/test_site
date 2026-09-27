@@ -5,11 +5,22 @@ use App\Http\Controllers\UserListController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MailController;
 
 // ログイン画面
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-// ログイン処理
-Route::post('/login', [LoginController::class, 'login']);
+Route::prefix('/login')
+    ->controller(LoginController::class)
+    ->group(function(){
+        Route::get('/','showLoginForm')->name('login');
+        Route::post('/','login');
+    });
+
+Route::get('/send-test-mail', [MailController::class, 'sendTest']);
+
+
+// Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+// // ログイン処理
+// Route::post('/login', [LoginController::class, 'login']);
 // ログアウト処理
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 

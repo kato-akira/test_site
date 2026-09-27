@@ -53,6 +53,15 @@ services:
       timeout: 5s
       retries: 10
 
+  mailpit:
+      image: axllent/mailpit
+      container_name: task-reminder-mailpit
+      ports:
+        - "8025:8025"   # Web UI
+        - "1025:1025"   # SMTP
+      networks:
+        - laravel_network # ← ここを追加！
+
 networks:
   laravel_network:
     driver: bridge
