@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Users; // ① Userモデルをインポート
+use App\Models\User; // ① Userモデルをインポート
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -11,7 +11,7 @@ class UserController extends Controller
     public function destroy($id)
         {
             // 1. データベースから該当のユーザーを見つけて削除
-            $user = Users::findOrFail($id);
+            $user = User::findOrFail($id);
             $user->delete();
 
             // 2. 削除完了後、一覧画面などにリダイレクト
@@ -34,7 +34,7 @@ class UserController extends Controller
         ]);
 
         // データの保存
-        Users::create([
+        User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password), // パスワードはハッシュ化して保存
